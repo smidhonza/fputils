@@ -1,0 +1,43 @@
+{
+  "name": "fputils",
+  "version": "1.0.0",
+  "description": "some common util methods",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "transpile": "tsc src/*.ts --target ES5 --outDir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smidhonza/fputils.git"
+  },
+  "keywords": [
+    "fp",
+    "utils"
+  ],
+  "author": "Honza Smid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smidhonza/fputils/issues"
+  },
+  "homepage": "https://github.com/smidhonza/fputils#readme",
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "20.0.2",
+    "jest": "20.0.4",
+    "ts-jest": "^20.0.6",
+    "typescript": "2.4.1"
+  }
+}
