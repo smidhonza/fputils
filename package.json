@@ -8,7 +8,7 @@
   "scripts": {
     "test": "jest",
     "transpile": "tsc src/*.ts --target ES5 --outDir lib",
-    "prepublish": "npm run transpile"
+    "prepublish": "npm run test && npm run transpile"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,10 @@
   "keywords": [
     "fp",
     "utils"
+  ],
+  "files": [
+    "lib",
+    "src"
   ],
   "author": "Honza Smid",
   "license": "ISC",
@@ -36,9 +40,9 @@
     ]
   },
   "devDependencies": {
-    "@types/jest": "20.0.2",
+    "@types/jest": "20.0.4",
     "jest": "20.0.4",
-    "ts-jest": "^20.0.6",
-    "typescript": "2.4.1"
+    "ts-jest": "20.0.7",
+    "typescript": "2.4.2"
   }
 }
