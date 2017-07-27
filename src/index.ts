@@ -1,7 +1,10 @@
 export {
+  equals,
   compose,
   curry,
   prop,
   propEq,
   not,
-} from './utils';
+  remove,
+  removeAt
+} from './fputils';

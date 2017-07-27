@@ -3,8 +3,8 @@
   "version": "1.0.2",
   "description": "some common util methods",
   "main": "lib/index.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
+  "module": "src/index.ts",
+  "jsnext:main": "src/index.ts",
   "scripts": {
     "test": "jest",
     "transpile": "tsc src/*.ts --target ES5 --outDir lib",
