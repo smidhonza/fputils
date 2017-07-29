@@ -18,5 +18,7 @@ a bunch of useful util methods
     remove,
     removeAt,
     isOdd,
+    filter,
+    tail,
   } from 'fputils';
 ```

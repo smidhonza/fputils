@@ -24,11 +24,17 @@ export const propEq = (property, value) => (object = {}) => equals(prop(property
 
 export const isOdd = (value: number): boolean => compose(not, equals(0))(value % 2);
 
-export const filter = curry((fn: Func, array: any[]): any[] => array.filter(fn));
+export const filter = curry(<T>(fn: Func, array: T[]): T[] => array.filter(fn));
+
+// todo polyfill for es5
+// export const find = curry(<T>(fn: Func, array: T[]): T | null => array.find(fn) || null);
 
 const notEqual = (value) => compose(not, equals(value));
-export const remove = curry((value: any, array: any[]): any[] => filter(notEqual(value), array));
+export const remove = curry(<T, R>(value: T, array: R[]): R[] => filter(notEqual(value), array));
 
 const notEqualIndex = (index) => (_, i) => compose(not, equals(index))(i);
 
-export const removeAt = curry((index: number, array: any[]): any[] => filter(notEqualIndex(index), array));
+export const removeAt = curry(<T>(index: number, array: T[]): T[] => filter(notEqualIndex(index), array));
+
+export const tail = <T>(array: T[]): T[] => array.slice(1);
+

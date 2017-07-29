@@ -9,6 +9,7 @@ import {
   removeAt,
   filter,
   isOdd,
+  tail,
 } from "../fputils";
 
 describe("FP utils", () => {
@@ -133,12 +134,33 @@ describe("FP utils", () => {
     });
   });
 
+  // describe("find", () => {
+  //   it("find the result", () => {
+  //     expect(find((number) => number == 2, [1, 2])).toEqual(2);
+  //     expect(find((number) => number == 2, [1, 3])).toEqual(null);
+  //   });
+  //
+  //   it("find the result curried", () => {
+  //     expect(find((number) => number == 2)([1, 2])).toEqual(2);
+  //     expect(find((number) => number == 2)([1, 3])).toEqual(null);
+  //   });
+  // });
+
   describe('isOdd', () => {
     it('tell us when number is odd or even', () => {
       expect(isOdd(0)).toEqual(false);
       expect(isOdd(1)).toEqual(true);
       expect(isOdd(2)).toEqual(false);
       expect(isOdd(3)).toEqual(true);
+      expect(compose(isOdd)(2)).toEqual(false)
+      expect(compose(isOdd)(3)).toEqual(true)
+    });
+  });
+
+  describe("tail", () => {
+    it("remove head from array", () => {
+      expect(tail(["a", "b", "c"])).toEqual(["b", "c"]);
+      expect(compose(tail)(["a", "b"])).toEqual(["b"])
     });
   });
 });

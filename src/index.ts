@@ -6,5 +6,8 @@ export {
   propEq,
   not,
   remove,
-  removeAt
+  removeAt,
+  isOdd,
+  filter,
+  tail,
 } from './fputils';
