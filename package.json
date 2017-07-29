@@ -9,7 +9,7 @@
     "test": "jest",
     "transpile-to-es5": "tsc src/*.ts --target ES5 --outDir lib",
     "transpile-to-es6": "tsc src/*.ts --target ES6 --outDir es",
-    "transpile": "npm run transpile-to-es5 && transpile-to-es6",
+    "transpile": "npm run transpile-to-es5 && npm run transpile-to-es6",
     "prepublish": "npm run test && npm run transpile"
   },
   "repository": {
