@@ -3,12 +3,10 @@
   "version": "1.0.7",
   "description": "some common util methods",
   "main": "lib/index.js",
-  "jsnext:main": "es/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
-    "transpile-to-js": "tsc src/*.ts --target ES3 --outDir lib",
-    "transpile-to-es6": "tsc src/*.ts --target ES6 --outDir es",
-    "transpile": "npm run transpile-to-js && npm run transpile-to-es6",
+    "transpile": "tsc",
     "prepublish": "npm run test && npm run transpile"
   },
   "repository": {
@@ -42,9 +40,9 @@
     ]
   },
   "devDependencies": {
-    "@types/jest": "20.0.2",
-    "jest": "20.0.4",
-    "ts-jest": "20.0.7",
-    "typescript": "2.4.2"
+    "@types/jest": "22.0.1",
+    "jest": "22.1.1",
+    "ts-jest": "22.0.1",
+    "typescript": "2.6.2"
   }
 }
