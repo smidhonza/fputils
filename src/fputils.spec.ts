@@ -18,6 +18,7 @@ import {
   view,
   over,
   foldr,
+  find,
 } from './index';
 
 describe('FP utils', () => {
@@ -77,9 +78,9 @@ describe('FP utils', () => {
 
   describe('propEq', () => {
     it('returns right property match', () => {
+      expect(propEq('name', 5, { name: 5 })).toEqual(true);
       expect(propEq('name', 'test 1')({ name: 'test 1' })).toEqual(true);
       expect(propEq('name', 'test 2')({ name: 'test 1' })).toEqual(false);
-      expect(propEq('name', 'test')()).toEqual(false);
     });
   });
 
@@ -140,8 +141,6 @@ describe('FP utils', () => {
     const minTwo = number => number >= 2;
 
     it('filters', () => {
-
-
       expect(filter(minTwo, [1, 2, 3, 4])).toEqual([2, 3, 4]);
       expect(filter((string) => string !== 'a', ['a', 'b'])).toEqual(['b']);
     });
@@ -217,10 +216,33 @@ describe('FP utils', () => {
 
   describe('foldr', () => {
     it('should work', () => {
-      const add = (a, b) => a + b;
+      const add = (accumulator, value) => accumulator + value;
 
       expect(foldr(add, 1, [2, 3])).toEqual(6);
       expect(foldr(add, 2)([4, 6])).toEqual(12);
+    });
+
+    it('reduce an object', () => {
+      const func = (accumulator, value) => ({ ...accumulator, ...value });
+
+      expect(foldr(func, {})([{ a: '1'}, { b: 2 }])).toEqual({ a: "1", b: 2 });
+    });
+  });
+
+
+  describe('find', () => {
+    it('returns an item when found', () => {
+      expect(<number>find((item) => item === 2, [2, 3])).toEqual(2);
+      expect(find((item) => item.id === 2, [{ id: 2 }, { id: 3 }])).toEqual({ id: 2 });
+
+      expect(find((item) => item.id === 3)([{ id: 2 }, { id: 3 }])).toEqual({ id: 3 });
+    });
+
+    it('returns a nul when could not found', () => {
+      expect(<string>find((item) => item === "?")([])).toEqual(null);
+      expect(find((item) => item === "33", [])).toEqual(null);
+      expect(<number>find((item) => item === 4, [2, 3])).toEqual(null);
+      expect(find((item) => item.id === 4, [{ id: 2 }, { id: 3 }])).toEqual(null);
     });
   });
 });
