@@ -1,42 +1,58 @@
 export type Func = (a: any) => any;
 export type Func2 = (a: any, b: any) => any;
 
-
 export const curry: (func: (...args: any[]) => any) => any = (func: (...args: any[]) => any) => {
-  const r = (args) => {
+  const r = args => {
     if (args.length >= func.length) {
       return func(...args);
     }
     return (...secArgs) => r([...args, ...secArgs]);
   };
 
-return (...args) => r(args);
+  return (...args) => r(args);
 };
 
-
 export interface Equals {
-  <T1, T2, R>(a: T1, b: T2): R
-  <T1, T2>(a: T1): (b: T2) => boolean
+  <T1, T2, R>(a: T1, b: T2): R;
+  <T1, T2>(a: T1): (b: T2) => boolean;
 }
 
 export const equals: Equals = curry((a: any, b: any): boolean => a === b);
 
-export const compose = (...functions: Func[]) => (value: any) => functions.reduceRight((args, fn) => fn(args), value);
+export const compose = (...functions: Func[]) => (value: any) =>
+  functions.reduceRight((args, fn) => fn(args), value);
 
-export const not = curry((input) => !input);
+export const not = curry(input => !input);
 
 export const prop = curry((property, object) => object[property]);
 
 export interface PropEq {
-  <T>(property: string, value: T, object: object): boolean
-  <T>(property: string, value: T) : (object: object) => boolean
+  <T>(property: string, value: T, object: object): boolean;
+  <T>(property: string, value: T): (object: object) => boolean;
 }
-export const propEq: PropEq = curry((property: string, value: any, object: {} = {}) => equals(prop(property, object), value));
+export const propEq: PropEq = curry((property: string, value: any, object: {} = {}) =>
+  equals(prop(property, object), value)
+);
 
-export const isOdd = (value: number): boolean => compose(not, equals(0))(value % 2);
+export const isOdd = (value: number): boolean =>
+  compose(
+    not,
+    equals(0)
+  )(value % 2);
 
-const notEqual = (value) => compose(not, equals(value));
-export const remove = curry(<T, R>(value: T, array: R[]): R[] => filter(notEqual(value), array));
+const notEqual = value =>
+  compose(
+    not,
+    equals(value)
+  );
+
+export interface Remove {
+  <T>(remove: T, from: T[]): T[];
+  <T>(remove: T): (from: T[]) => T[];
+}
+export const remove: Remove = curry(
+  <T, R>(value: T, array: R[]): R[] => filter(notEqual(value), array)
+);
 
 export const head: <T>(array: T[]) => T | undefined = array => array[0];
 
@@ -57,8 +73,8 @@ export const lensProp = (key: string) => lens(prop(key))(assoc(key));
 export const concat = curry((head, tail) => head.concat(tail));
 
 export interface Foldr {
-  <Initial, Value, Result>(a: Func2, b: Initial, c: Value[]): Result
-  <Initial, Value, Result>(a: Func2, b: Initial): (c: Value[]) => Result
+  <Initial, Value, Result>(a: Func2, b: Initial, c: Value[]): Result;
+  <Initial, Value, Result>(a: Func2, b: Initial): (c: Value[]) => Result;
 }
 
 export const foldr: Foldr = curry((fn, initial, value) => {
@@ -67,29 +83,33 @@ export const foldr: Foldr = curry((fn, initial, value) => {
   return fn(head(value), foldr(fn, initial, tail(value)));
 });
 
-
 const prepend = <T>(value: any, array: T[]): T[] => [value].concat(array);
 
 export interface Map {
-  <T, R>(a: Func, b: T[]): R[]
-  <T, R>(a: Func): (b: T[]) => R[]
+  <T, R>(func: (bit: T) => R, over: T[]): R[];
+  <T, R>(func: (bit: T) => R): (over: T[]) => R[];
 }
 
-export const map: Map = curry((func, array) => foldr((head, tail) => prepend(func(head), tail), [], array));
+export const map: Map = curry((func, array) =>
+  foldr((head, tail) => prepend(func(head), tail), [], array)
+);
 
-export const filter: Map = curry((func, array) => {
-  const x = (head, tail) => {
+export const filter: Map = curry((func, array) =>
+  foldr((head, tail) => {
     if (func(head)) return prepend(head, tail);
 
     return tail;
-  };
-
-  return foldr(x, [], array);
-});
+  }, [], array));
 
 export interface Find {
-  <T>(func: Func, array: T[]): T | null
-  <T>(func: Func) : (array: T[]) => T | null
+  <T>(func: (bit: T) => boolean, array: T[]): T | null;
+  <T>(func: (bit: T) => boolean): (array: T[]) => T | null;
 }
 
-export const find: Find = curry((func, array) => compose(head, filter(func))(array) || null);
+export const find: Find = curry(
+  (func, array) =>
+    compose(
+      head,
+      filter(func)
+    )(array) || null
+);
