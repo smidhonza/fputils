@@ -19,8 +19,7 @@ export interface Equals {
 
 export const equals: Equals = curry((a: any, b: any): boolean => a === b);
 
-export const compose = (...functions: Func[]) => (value: any) =>
-  functions.reduceRight((args, fn) => fn(args), value);
+export const compose = (...functions) => functions.reduce((f, fn) => (...args) => f(fn(...args)));
 
 export const not = curry(input => !input);
 
@@ -30,21 +29,24 @@ export interface PropEq {
   <T>(property: string, value: T, object: object): boolean;
   <T>(property: string, value: T): (object: object) => boolean;
 }
-export const propEq: PropEq = curry((property: string, value: any, object: {} = {}) =>
-  equals(prop(property, object), value)
-);
+export const propEq: PropEq = curry((property, value, object = {}) => equals(prop(property, object), value));
 
-export const isOdd = (value: number): boolean =>
-  compose(
-    not,
-    equals(0)
-  )(value % 2);
+export interface Modulo {
+  (divisor: number, dividend: number): number
+  (divisor: number): (dividend: number) => number
+}
 
-const notEqual = value =>
-  compose(
-    not,
-    equals(value)
-  );
+export const modulo: Modulo = curry((divisor, dividend) => dividend % divisor);
+
+const toBool = (number: number): boolean => !!number;
+
+interface IsOdd {
+  (number: number): boolean
+}
+
+export const isOdd: IsOdd = compose(toBool, modulo(2));
+
+const notEqual = value => compose(not, equals(value));
 
 export interface Remove {
   <T>(remove: T, from: T[]): T[];
