@@ -1,6 +1,8 @@
 export type Func = (a: any) => any;
 export type Func2 = (a: any, b: any) => any;
 
+export type Optional<T> = T | undefined;
+
 export const curry: (func: (...args: any[]) => any) => any = (func: (...args: any[]) => any) => {
   const r = args => {
     if (args.length >= func.length) {
@@ -56,9 +58,9 @@ export const remove: Remove = curry(
   <T, R>(value: T, array: R[]): R[] => filter(notEqual(value), array)
 );
 
-export const head: <T>(array: T[]) => T | undefined = array => array[0];
+export const head: <T>(array: T[]) => Optional<T> = array => array[0];
 
-export const tail = <T>(array: T[]): T[] => array.slice(1);
+export const tail = <T>(array: T[] = []): T[] => array.slice(1);
 
 const lens = get => set => ({ get, set });
 
@@ -104,8 +106,8 @@ export const filter: Map = curry((func, array) =>
   }, [], array));
 
 export interface Find {
-  <T>(func: (bit: T) => boolean, array: T[]): T | null;
-  <T>(func: (bit: T) => boolean): (array: T[]) => T | null;
+  <T>(func: (bit: T) => boolean, array: T[]): Optional<T>;
+  <T>(func: (bit: T) => boolean): (array: T[]) => Optional<T>;
 }
 
 export const find: Find = curry(
@@ -113,5 +115,16 @@ export const find: Find = curry(
     compose(
       head,
       filter(func)
-    )(array) || null
+    )(array) || undefined
 );
+
+export const path = <T>(...bits: string[]) => (object: object): Optional<T> => {
+  const [property, ...rest] = bits;
+  if (object[property]) {
+    if (head(rest)) {
+      return path<T>(...rest)(object[property]);
+    }
+    return object[property];
+  }
+  return undefined;
+};

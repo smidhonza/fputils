@@ -9,9 +9,9 @@ describe("find", () => {
   });
 
   it("returns a null when could not found", () => {
-    expect(<string>find(item => item === "?")([])).toEqual(null);
-    expect(find(item => item === "33", [])).toEqual(null);
-    expect(<number>find(item => item === 4, [2, 3])).toEqual(null);
-    expect(find(item => item.id === 4, [{ id: 2 }, { id: 3 }])).toEqual(null);
+    expect(<string>find(item => item === "?")([])).toEqual(undefined);
+    expect(find(item => item === "33", [])).toEqual(undefined);
+    expect(<number>find(item => item === 4, [2, 3])).toEqual(undefined);
+    expect(find(item => item.id === 4, [{ id: 2 }, { id: 3 }])).toEqual(undefined);
   });
 });
