@@ -6,7 +6,8 @@
     "target": "es5",
     "strict": false,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": ["es2015", "es6", "dom"]
   },
   "exclude": [
     "src/**/*.spec.ts"

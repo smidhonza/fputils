@@ -5,6 +5,7 @@ describe("find", () => {
     expect(<number>find(item => item === 2, [2, 3])).toEqual(2);
     expect(find(item => item.id === 2, [{ id: 2 }, { id: 3 }])).toEqual({ id: 2 });
 
+    // @ts-ignore
     expect(find(item => item.id === 3)([{ id: 2 }, { id: 3 }])).toEqual({ id: 3 });
   });
 
