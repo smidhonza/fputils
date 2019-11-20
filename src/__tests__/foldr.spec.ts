@@ -6,6 +6,7 @@ describe("foldr", () => {
 
     expect(foldr(add, 1, [2, 3])).toEqual(6);
     expect(foldr(add, 2)([4, 6])).toEqual(12);
+    expect(foldr(add, 8)(undefined)).toEqual(8);
   });
 
   it("reduce an object", () => {

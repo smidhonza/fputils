@@ -82,7 +82,7 @@ export interface Foldr {
 }
 
 export const foldr: Foldr = curry((fn, initial, value) => {
-  if (value.length === 0) return initial;
+  if (!value || value.length === 0) return initial;
 
   return fn(head(value), foldr(fn, initial, tail(value)));
 });
