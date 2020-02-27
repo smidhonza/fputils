@@ -31,7 +31,7 @@
   "homepage": "https://github.com/smidhonza/fputils#readme",
   "jest": {
     "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "ts": "ts-jest"
     },
     "testRegex": "\\.spec\\.ts$",
     "moduleFileExtensions": [

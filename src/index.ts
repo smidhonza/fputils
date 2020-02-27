@@ -2,39 +2,53 @@ export type Func = (a: any) => any;
 export type Func2 = (a: any, b: any) => any;
 
 export type Optional<T> = T | undefined;
+type ValueOf<T> = T[keyof T];
 
-export const curry: (func: (...args: any[]) => any) => any = (func: (...args: any[]) => any) => {
-  const r = args => {
-    if (args.length >= func.length) {
-      return func(...args);
+export const curry = <F extends (...args: any) => any>(fn: F) => {
+  const result = args => {
+    if (args.length >= fn.length) {
+      return fn(...args);
     }
-    return (...secArgs) => r([...args, ...secArgs]);
+    return (...secArgs) => result([...args, ...secArgs]);
   };
 
-  return (...args) => r(args);
+  return (...args) => result(args);
 };
 
 export interface Equals {
-  <T1, T2, R>(a: T1, b: T2): R;
+  <T1, T2>(a: T1, b: T2): boolean;
+
   <T1, T2>(a: T1): (b: T2) => boolean;
 }
 
 export const equals: Equals = curry((a: any, b: any): boolean => a === b);
 
-export const compose = (...functions) => functions.reduce((f, fn) => (...args) => f(fn(...args)));
+export const compose = (...fns: any[]) => fns.reduce((f, fn) => (...args) => f(fn(...args)));
 
 export const not = curry(input => !input);
 
-export const prop = curry((property, object) => object[property]);
+type Prop = <T extends object>(property: keyof T, object: T) => ValueOf<T>;
 
-export interface PropEq {
-  <T>(property: string, value: T, object: object): boolean;
-  <T>(property: string, value: T): (object: object) => boolean;
+interface PropCurried {
+  <T extends object>(property: keyof T, object: T): ValueOf<T>;
+
+  <T extends object>(property: keyof T): (object: T) => ValueOf<T>;
 }
-export const propEq: PropEq = curry((property, value, object = {}) => equals(prop(property, object), value));
+
+export const prop: PropCurried = curry<Prop>((property, object) => object[property]);
+
+export type PropEq = <T extends object, V>(property: keyof T, value: V, object: T) => boolean;
+
+interface PropEqCurried {
+  <T extends object, V>(property: keyof T, value: V, object: T): boolean;
+  <T extends object, V>(property: keyof T, value: V): (object: T) => boolean;
+}
+
+export const propEq: PropEqCurried = curry<PropEq>((property, value, object) => equals(prop(property, object), value));
 
 export interface Modulo {
   (divisor: number, dividend: number): number
+
   (divisor: number): (dividend: number) => number
 }
 
@@ -52,6 +66,7 @@ const notEqual = value => compose(not, equals(value));
 
 export interface Remove {
   <T>(remove: T, from: T[]): T[];
+
   <T>(remove: T): (from: T[]) => T[];
 }
 export const remove: Remove = curry(
@@ -78,6 +93,7 @@ export const concat = curry((head, tail) => head.concat(tail));
 
 export interface Foldr {
   <Initial, Value, Result>(a: Func2, b: Initial, c: Value[]): Result;
+
   <Initial, Value, Result>(a: Func2, b: Initial): (c: Value[]) => Result;
 }
 
@@ -91,6 +107,7 @@ const prepend = <T>(value: any, array: T[]): T[] => [value].concat(array);
 
 export interface Map {
   <T, R>(func: (bit: T) => R, over: T[]): R[];
+
   <T, R>(func: (bit: T) => R): (over: T[]) => R[];
 }
 
@@ -107,6 +124,7 @@ export const filter: Map = curry((func, array) =>
 
 export interface Find {
   <T>(func: (bit: T) => boolean, array: T[]): Optional<T>;
+
   <T>(func: (bit: T) => boolean): (array: T[]) => Optional<T>;
 }
 
