@@ -1,4 +1,4 @@
-import { assoc } from "../index";
+import { assoc } from '../lens';
 
 describe("assoc", () => {
   it("should work", () => {

@@ -1,4 +1,4 @@
-import { concat } from "../index";
+import { concat } from "../array";
 
 describe("concat", () => {
   it("concatinate", () => {

@@ -1,4 +1,4 @@
-import { lensProp, over } from "../index";
+import { lensProp, over } from "../lens";
 
 describe("over", () => {
   it("should apply a function to the lens", () => {

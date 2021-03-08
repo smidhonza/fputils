@@ -1,4 +1,4 @@
-import { path } from "../index";
+import { path } from '../path';
 
 describe("path", () => {
   it("should work", () => {

@@ -1,4 +1,5 @@
-import { compose, tail } from "../index";
+import { tail } from "../array";
+import { compose } from '../compose';
 
 describe("tail", () => {
   it("remove head from array", () => {

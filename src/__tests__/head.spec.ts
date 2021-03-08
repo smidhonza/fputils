@@ -1,4 +1,5 @@
-import { compose, head } from "../index";
+import { head } from '../array';
+import { compose } from '../compose';
 
 describe("head", () => {
   it("returns first element from array", () => {

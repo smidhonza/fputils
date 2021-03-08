@@ -1,4 +1,4 @@
-import { prop } from "../index";
+import { prop } from '../prop';
 
 describe("prop", () => {
   it("returns right property when passed in as two params", () => {

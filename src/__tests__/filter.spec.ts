@@ -1,4 +1,4 @@
-import { filter } from "../index";
+import { filter } from "../array";
 
 describe("filter", () => {
   const minTwo = number => number >= 2;

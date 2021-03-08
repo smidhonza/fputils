@@ -1,4 +1,4 @@
-import { remove } from "../index";
+import { remove } from "../array";
 
 describe("remove", () => {
   it("remove value from array and won't modify the current array", () => {

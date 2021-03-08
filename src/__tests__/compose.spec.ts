@@ -1,4 +1,4 @@
-import { compose } from "../index";
+import { compose } from "../compose";
 
 describe("compose", () => {
   it("returns composed result", () => {

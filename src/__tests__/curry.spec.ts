@@ -1,4 +1,4 @@
-import { curry } from "../index";
+import { curry } from "../curry";
 
 describe("curry", () => {
   it("returns a curried sum function", () => {

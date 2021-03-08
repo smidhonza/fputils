@@ -1,4 +1,5 @@
-import { compose, isOdd } from "../index";
+import { isOdd } from '../common';
+import { compose } from '../compose';
 
 describe("isOdd", () => {
   it("tell us when number is odd or even", () => {
