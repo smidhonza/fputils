@@ -7,7 +7,7 @@ describe("curry", () => {
   });
 
   it("returns a function if you miss the params", () => {
-    const sum = curry((a, b, c, d) => a + b + c + d);
+    const sum = curry((a: number, b: number, c: number, d: number) => a + b + c + d);
 
     const sum1 = sum(1);
     const sum2 = sum1(2);

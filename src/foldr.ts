@@ -3,10 +3,9 @@ import { head, tail } from './array';
 
 type Func2 = (a: any, b: any) => any;
 
-export interface Foldr {
-  <Initial, Value, Result>(a: Func2, b: Initial, c: Value[]): Result;
-
-  <Initial, Value, Result>(a: Func2, b: Initial): (c: Value[]) => Result;
+export type Foldr = {
+  <B, V, T>(a: Func2, b: B, c: V[]): T;
+  <B, V, T>(a: Func2, b: B): (c: V[]) => T;
 }
 
 export const foldr: Foldr = curry((fn, initial, value) => {

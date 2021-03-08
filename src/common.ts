@@ -18,12 +18,11 @@ interface IsOdd {
 export const isOdd: IsOdd = compose(toBool, modulo(2));
 
 
-export interface Equals {
-  <T1, T2>(a: T1, b: T2): boolean;
-
-  <T1, T2>(a: T1): (b: T2) => boolean;
+export type Equals = {
+  <A, B>(a: A, b: B): boolean;
+  <A, B>(a: A): (b: B) => boolean;
 }
 
-export const equals: Equals = curry((a: any, b: any): boolean => a === b);
+export const equals: Equals = curry((a, b) => a === b);
 
 export const notEqual = value => compose(not, equals(value));
