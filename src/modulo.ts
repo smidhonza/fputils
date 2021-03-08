@@ -1,8 +1,7 @@
 import { curry } from './curry';
 
-export interface Modulo {
+export type Modulo = {
   (divisor: number, dividend: number): number
-
   (divisor: number): (dividend: number) => number
 }
 

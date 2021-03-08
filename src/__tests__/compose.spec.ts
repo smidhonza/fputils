@@ -2,11 +2,13 @@ import { compose } from "../compose";
 
 describe("compose", () => {
   it("returns composed result", () => {
-    const add5 = a => a + 5;
-    const add10 = a => a + 10;
+    const add5 = (a: number) => a + 5;
+    const add10 = (a: number) => a + 10;
+    const toString = (a: number): string => `${a}`;
 
     expect(compose(add10, add5)(20)).toEqual(35);
     expect(compose(add10, add5, add5, add10, add5)(7)).toEqual(42);
+    expect(compose(toString, add5, add5)(7)).toEqual('17');
   });
 
   it("returns a partially applied function", () => {
