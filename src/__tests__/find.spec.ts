@@ -1,4 +1,4 @@
-import { find } from "../index";
+import { find } from "../array";
 
 describe("find", () => {
   it("returns an item when found", () => {

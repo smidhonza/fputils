@@ -1,4 +1,4 @@
-import { not } from "../index";
+import { not } from "../common";
 
 describe("not", () => {
   it("negate the input value", () => {

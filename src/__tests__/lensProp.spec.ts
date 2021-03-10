@@ -1,4 +1,4 @@
-import { lensProp, set, view } from "../index";
+import { lensProp, set, view } from '../lens';
 
 describe("lensProp", () => {
   it("should do lensing with view", () => {

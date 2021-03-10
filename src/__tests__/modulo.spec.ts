@@ -1,4 +1,4 @@
-import { modulo } from "../index";
+import { modulo } from "../modulo";
 
 describe("modulo", () => {
   it("runs ok with both params", () => {

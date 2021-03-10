@@ -1,4 +1,4 @@
-import { foldr } from "../index";
+import { foldr } from '../foldr';
 
 describe("foldr", () => {
   it("should work", () => {
