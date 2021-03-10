@@ -7,8 +7,8 @@
   "scripts": {
     "test": "jest",
     "clean": "rm -rf ./lib",
-    "transpile": "npm run clean && tsc",
-    "prepublishOnly": "npm run test && npm run clean && npm run transpile"
+    "build": "yarn clean && tsc",
+    "prepublishOnly": "yarn test && yarn clean && yarn build"
   },
   "repository": {
     "type": "git",
