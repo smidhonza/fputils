@@ -31,8 +31,8 @@ export type Find = {
 export const find: Find = curry((func, array) => array.find(func));
 
 export type Filter = {
-  <T>(func: (a: T, index: number) => T, over: T[]): T[];
-  <T>(func: (a: T, index: number) => T): (over: T[]) => T[];
+  <T>(func: (a: T, index: number) => boolean, over: T[]): T[];
+  <T>(func: (a: T, index: number) => boolean): (over: T[]) => T[];
 }
 
 export const filter: Filter = curry((func, array) => array.filter(func));

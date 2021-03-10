@@ -25,4 +25,4 @@ export type Equals = {
 
 export const equals: Equals = curry((a, b) => a === b);
 
-export const notEqual = value => compose(not, equals(value));
+export const notEqual: <A, B>(a: A) => (b: B) => boolean = (value) => compose(not, equals(value));
