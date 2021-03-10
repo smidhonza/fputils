@@ -1,4 +1,5 @@
 export * from './compose';
+export * from './either';
 export * from './curry';
 export * from './array';
 export * from './common';
