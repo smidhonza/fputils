@@ -1,13 +1,14 @@
 {
   "name": "fputils",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "some common util methods",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
     "clean": "rm -rf ./lib",
-    "build": "yarn clean && tsc"
+    "build": "yarn clean && tsc",
+    "prepublish": "yarn build"
   },
   "repository": {
     "type": "git",
