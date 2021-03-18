@@ -3,12 +3,12 @@ enum tag {
   'left' = 'left',
 }
 
-interface ILeft<A> {
+export interface ILeft<A> {
   value: A;
   tag: tag.left;
 }
 
-interface IRight<B> {
+export interface IRight<B> {
   value: B;
   tag: tag.right;
 }
