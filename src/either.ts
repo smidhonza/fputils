@@ -29,6 +29,12 @@ export const either = <L, R, A, B>(leftFn: (left: L) => A, rightFn: (right: R) =
   return rightFn(value.value);
 };
 
+export const whenRight = <V, L, R>(f: (value: R) => Either<L,  R>) => (maybe: Either<L, R>) => {
+  if(isLeft(maybe)) {
+    return maybe;
+  }
+  return f(maybe.value)
+};
 
 export const tryCatch = async <T>(fn: () => Promise<T>): Promise<Maybe<T>> => {
   try {

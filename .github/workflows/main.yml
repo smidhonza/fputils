@@ -27,6 +27,13 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: fe5e82784e56ed46d9c5fc6c633311496fb6b6bf692ed3ad64c51062056250cd
+        with:
+          coverageCommand: yarn coverage
+
   publish:
     name: npm-publish
     runs-on: ubuntu-latest
