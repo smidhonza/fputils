@@ -6,6 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
+    "coverage": "jest --collect-coverage",
     "clean": "rm -rf ./lib",
     "build": "yarn clean && tsc",
     "prepublish": "yarn build"
@@ -37,7 +38,8 @@
     "moduleFileExtensions": [
       "ts",
       "js"
-    ]
+    ],
+    "coverageReporters": ["lcov"]
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",

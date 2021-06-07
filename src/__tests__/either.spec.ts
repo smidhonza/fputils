@@ -7,9 +7,6 @@ describe('when Right', () => {
     const addA = (input: string): Maybe<string> => Left(new Error('first error'));
     const addB = (input: string): Maybe<string> => Right(`${input}B`);
 
-
-
-
     expect(pipe(Right('a'), whenRight(addB))).toEqual(Right('aB'));
     expect(pipe('X', addA, whenRight(addB))).toEqual(Left(new Error('first error')));
   })
