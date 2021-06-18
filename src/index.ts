@@ -8,3 +8,4 @@ export * from './modulo';
 export * from './foldr';
 export * from './path';
 export * from './pipe';
+export * from './promise';
