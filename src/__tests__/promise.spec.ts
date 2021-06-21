@@ -1,15 +1,15 @@
-import { untilResolved, untilRight } from '../promise'
+import { untilNotResolved, untilNotRight } from '../promise'
 import { Left, Right } from '../either'
 
-describe('untilResolved', () => {
+describe('untilNotResolved', () => {
   it('empty array', async () => {
-      const res = await untilResolved([]);
+      const res = await untilNotResolved([]);
       expect(res.tag).toBe('left');
       expect(res.value).toEqual(new Error('No promise resolved.'));
   });
   it('all rejected', async () => {
     const rejection = Promise.reject('No.');
-    const res = await untilResolved([rejection, rejection, rejection]);
+    const res = await untilNotResolved([rejection, rejection, rejection]);
 
     expect(res.tag).toBe('left');
     expect(res.value).toEqual(new Error('No promise resolved.'));
@@ -18,7 +18,7 @@ describe('untilResolved', () => {
     const rejection = Promise.reject('No.');
     const resolution = Promise.resolve('Yes.');
 
-    const res = await untilResolved([rejection, rejection, resolution]);
+    const res = await untilNotResolved([rejection, rejection, resolution]);
 
     expect(res.tag).toBe('right');
     expect(res.value).toEqual('Yes.');
@@ -26,22 +26,22 @@ describe('untilResolved', () => {
   it('returns first resolved promise', async () => {
     const rejection = Promise.reject('No.');
 
-    const res = await untilResolved([rejection, Promise.resolve('Yes 0.'), rejection, Promise.resolve('Yes 1.')]);
+    const res = await untilNotResolved([rejection, Promise.resolve('Yes 0.'), rejection, Promise.resolve('Yes 1.')]);
 
     expect(res.tag).toBe('right');
     expect(res.value).toEqual('Yes 0.');
   });
 });
 
-describe('untilRight', () => {
+describe('untilNotRight', () => {
   it('empty array', async () => {
-    const res = await untilRight([]);
+    const res = await untilNotRight([]);
     expect(res.tag).toBe('left');
     expect(res.value).toEqual(new Error('No promise resolved.'));
   });
   it('all rejected', async () => {
     const rejection = Promise.resolve(Left(new Error('No.')));
-    const res = await untilRight([rejection, rejection, rejection]);
+    const res = await untilNotRight([rejection, rejection, rejection]);
 
     expect(res.tag).toBe('left');
     expect(res.value).toEqual(new Error('No promise resolved.'));
@@ -50,7 +50,7 @@ describe('untilRight', () => {
     const rejection = Promise.resolve(Left(new Error('No.')));
     const resolution = Promise.resolve(Right('Yes.'));
 
-    const res = await untilRight([rejection, rejection, resolution]);
+    const res = await untilNotRight([rejection, rejection, resolution]);
 
     expect(res.tag).toBe('right');
     expect(res.value).toEqual('Yes.');
@@ -58,7 +58,7 @@ describe('untilRight', () => {
   it('returns first resolved promise', async () => {
     const rejection = Promise.resolve(Left(new Error('No.')));
 
-    const res = await untilRight([rejection, Promise.resolve(Right('Yes 0.')), rejection, Promise.resolve(Right('Yes 1.'))]);
+    const res = await untilNotRight([rejection, Promise.resolve(Right('Yes 0.')), rejection, Promise.resolve(Right('Yes 1.'))]);
 
     expect(res.tag).toBe('right');
     expect(res.value).toEqual('Yes 0.');
