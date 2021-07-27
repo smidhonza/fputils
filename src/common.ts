@@ -9,13 +9,18 @@ export type ValueOf<T> = T[keyof T];
 export const not = curry(input => !input);
 
 
-const toBool = (number: number): boolean => !!number;
+/**
+ *
+ * @param {number | string} expression
+ * @return {boolean}
+ */
+export const bool = (expression: number | string): boolean => !!expression;
 
 interface IsOdd {
   (number: number): boolean
 }
 
-export const isOdd: IsOdd = compose(toBool, modulo(2));
+export const isOdd: IsOdd = compose(bool, modulo(2));
 
 
 export type Equals = {

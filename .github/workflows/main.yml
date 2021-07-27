@@ -51,7 +51,6 @@ jobs:
         with:
           tag_name: "v%s"
           tag_message: "v%s"
-          commit_pattern: "^Release (\\S+)"
           publish_command: "yarn"
           publish_args: "--non-interactive"
         env:
