@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test-package:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,6 +36,7 @@ jobs:
 
   publish:
     name: npm-publish
+    needs: test-package
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
