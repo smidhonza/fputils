@@ -1,8 +1,8 @@
-# fputils
+# FP utils
 
-a bunch of useful util methods
+A bunch of useful util methods
 
 
-```bash
-npm install fputils
+```javascript
+import { either } from 'fputils';
 ```
