@@ -1,6 +1,6 @@
 # FP utils
 
-A bunch of useful util methods
+A bunch of useful utility functions
 
 
 ```javascript
