@@ -1,13 +1,19 @@
-import { Optional } from './common';
+import { has, Optional } from './common';
 import { head } from './array';
+import { curry } from './curry';
+import { prop } from './prop';
 
-export const path = <T>(...bits: string[]) => (object: object): Optional<T> => {
+type IPath = {
+  <T>(bits: string[]): (object: object) => Optional<T>;
+  <T>(bits: string[], object: object): Optional<T>;
+}
+export const path: IPath = curry((bits, object) => {
   const [property, ...rest] = bits;
-  if (object[property]) {
-    if (head(rest)) {
-      return path<T>(...rest)(object[property]);
-    }
-    return object[property];
+  if (!has(property, object)) {
+    return undefined;
   }
-  return undefined;
-};
+  if (head(rest)) {
+    return path(rest, prop(property, object));
+  }
+  return prop(property, object);
+});
