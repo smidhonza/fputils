@@ -1,3 +1,5 @@
+export * from './assoc';
+export * from './assocPath';
 export * from './compose';
 export * from './either';
 export * from './curry';
@@ -9,4 +11,4 @@ export * from './foldr';
 export * from './path';
 export * from './pipe';
 export * from './promise';
-export * from './lens';
+export * from './lenses/lens';
