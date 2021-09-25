@@ -8,7 +8,7 @@ A bunch of useful utility functions
 ### Either
 
 ```typescript
-import { either, Eiter, Right, Left } from 'fputils';
+import { either, Either, Right, Left } from 'fputils';
 
 // define fetch function, this function does not throw, but returns Either data or error instead
 const get = <T>(url: string): Either<Error, T> => new Promise(async resolve => {
