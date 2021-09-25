@@ -11,4 +11,6 @@ export * from './foldr';
 export * from './path';
 export * from './pipe';
 export * from './promise';
+export * from './has';
+export * from './equals';
 export * from './lenses/lens';

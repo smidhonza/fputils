@@ -1,6 +1,7 @@
 import { curry } from './curry';
-import { equals, ValueOf } from './common';
+import { ValueOf } from './common';
 import { pipe } from './pipe';
+import { equals } from './equals';
 
 type Prop = {
   <T>(property: keyof T, object: T): ValueOf<T>;

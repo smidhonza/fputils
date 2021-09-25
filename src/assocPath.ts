@@ -1,4 +1,4 @@
-import { has } from './common';
+import { has } from './has';
 import { prop } from './prop';
 import { assoc } from './assoc';
 import { curry } from './curry';

@@ -1,4 +1,4 @@
-import { equals } from "../common";
+import { equals } from "../equals";
 
 describe("equals", () => {
   it("compares 2 numbers", () => {

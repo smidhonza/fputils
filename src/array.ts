@@ -1,5 +1,6 @@
-import { notEqual, Optional } from './common';
+import { Optional } from './common';
 import { curry } from './curry';
+import { notEqual } from './equals';
 
 export const head: <T>(array: T[]) => Optional<T> = array => array[0];
 export const tail = <T>(array: T[] = []): T[] => array.slice(1);

@@ -1,7 +1,8 @@
-import { has, Optional } from './common';
+import { Optional } from './common';
 import { head } from './array';
 import { curry } from './curry';
 import { prop } from './prop';
+import { has } from './has';
 
 type IPath = {
   <T>(bits: string[]): (object: object) => Optional<T>;
