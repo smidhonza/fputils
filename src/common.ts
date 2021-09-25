@@ -3,6 +3,7 @@ import { compose } from './compose';
 import { modulo } from './modulo';
 
 export type Optional<T> = T | undefined;
+export type Nullable<T> = T | null;
 export type ValueOf<T> = T[keyof T];
 
 export const not = curry(input => !input);

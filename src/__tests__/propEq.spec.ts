@@ -1,4 +1,4 @@
-import { propEq } from '../prop';
+import { propEq } from '../propEq';
 
 describe("propEq", () => {
   it("returns right property match", () => {
