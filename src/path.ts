@@ -1,20 +1,23 @@
-import { Optional } from './common';
+import {alwaysTrue, bool, not, Optional} from './common';
 import { head } from './array';
 import { curry } from './curry';
 import { prop } from './prop';
 import { has } from './has';
+import {cond} from "./cond";
+import {compose} from "./compose";
+import {pipe} from "./pipe";
+
+export type StringKeyObject = Record<string, object>;
 
 type IPath = {
-  <T>(bits: string[]): (object: object) => Optional<T>;
-  <T>(bits: string[], object: object): Optional<T>;
+  <T>(bits: string[]): (object: StringKeyObject) => Optional<T>;
+  <T>(bits: string[], object: StringKeyObject): Optional<T>;
 }
-export const path: IPath = curry((bits, object) => {
+
+export const path: IPath = curry((bits: string[], object: StringKeyObject ) => {
   const [property, ...rest] = bits;
-  if (!has(property, object)) {
-    return undefined;
-  }
-  if (head(rest)) {
-    return path(rest, prop(property, object));
-  }
-  return prop(property, object);
+  return cond([
+    [compose(not, has(property)), () => undefined],
+    [() => pipe(rest, head, bool), compose(path(rest), prop(property))],
+    [alwaysTrue, prop(property)]], object)
 });

@@ -16,3 +16,4 @@ export * from './has';
 export * from './equals';
 export * from './omit';
 export * from './lenses/lens';
+export * from './cond';

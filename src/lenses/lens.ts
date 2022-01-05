@@ -1,6 +1,6 @@
 import { curry } from '../curry';
 import { prop } from '../prop';
-import { path } from '../path';
+import {path, StringKeyObject} from '../path';
 import { Optional, ValueOf } from '../common';
 import { assoc } from '../assoc';
 import { assocPath } from '../assocPath';
@@ -34,10 +34,10 @@ export const over = curry((lens, fn, obj) => set(lens)(fn(view(lens)(obj)))(obj)
 export const lensProp = (key: string) => lens(prop(key), assoc(key));
 
 type IPathFC = {
-  <T>(bits: string[]): (object: object) => Optional<T>
-  <T>(bits: string[], object: object): Optional<T>
+  <T>(bits: string[]): (object: StringKeyObject) => Optional<T>
+  <T>(bits: string[], object: StringKeyObject): Optional<T>
 }
-export const pathFc: IPathFC = curry((bits: string[], object: object) => path(bits, object));
+export const pathFc: IPathFC = curry((bits: string[], object: StringKeyObject) => path(bits, object));
 
 export const lensPath = (key: string[]) => lens(pathFc(key))(assocPath(key));
 

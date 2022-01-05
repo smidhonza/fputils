@@ -21,4 +21,4 @@ interface IsOdd {
 }
 
 export const isOdd: IsOdd = compose(bool, modulo(2));
-
+export const alwaysTrue = (): true => true;
