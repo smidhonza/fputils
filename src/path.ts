@@ -7,7 +7,7 @@ import {cond} from "./cond";
 import {compose} from "./compose";
 import {pipe} from "./pipe";
 
-export type StringKeyObject = Record<string, object>;
+export type StringKeyObject = Record<string, object | string | number | boolean | [] | null >;
 
 type IPath = {
   <T>(bits: string[]): (object: StringKeyObject) => Optional<T>;
