@@ -33,11 +33,5 @@ export const over = curry((lens, fn, obj) => set(lens)(fn(view(lens)(obj)))(obj)
 
 export const lensProp = (key: string) => lens(prop(key), assoc(key));
 
-type IPathFC = {
-  <T>(bits: string[]): (object: object) => Optional<T>
-  <T>(bits: string[], object: object): Optional<T>
-}
-export const pathFc: IPathFC = curry((bits: string[], object: object) => path(bits, object));
-
-export const lensPath = (key: string[]) => lens(pathFc(key))(assocPath(key));
+export const lensPath = (key: string[]) => lens(path(key))(assocPath(key));
 

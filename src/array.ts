@@ -3,8 +3,10 @@ import { curry } from './curry';
 import { notEqual } from './equals';
 
 export const head: <T>(array: T[]) => Optional<T> = array => array[0];
+export const last: <T>(array: T[]) => Optional<T> = array => array[array.length - 1];
 export const tail = <T>(array: T[] = []): T[] => array.slice(1);
 export const isArray = <T>(array: T | T[]): array is T[] => Array.isArray(array);
+export const cutHead = <T>([head, ...tail]: T[]): { head: T; tail: T[] } => ({ head, tail });
 
 export const toArray = <T>(value: T | T[]): T[] => (isArray(value) ? value : [value]);
 
