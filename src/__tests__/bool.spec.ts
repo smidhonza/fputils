@@ -14,5 +14,6 @@ describe('bool', () => {
     expect(bool({a: 'a'})).toEqual(true)
     expect(bool([])).toEqual(true)
     expect(bool([1])).toEqual(true)
+    expect(bool()).toEqual(false)
   })
 })
