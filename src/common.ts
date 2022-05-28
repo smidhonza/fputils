@@ -11,10 +11,10 @@ export const not = curry(input => !input);
 
 /**
  *
- * @param {number | string} expression
+ * @param {Nullable<T> | undefined} expression
  * @return {boolean}
  */
-export const bool = (expression: number | string): boolean => !!expression;
+export const bool = <T>(expression?: Nullable<T>): boolean => !!expression;
 
 interface IsOdd {
   (number: number): boolean
