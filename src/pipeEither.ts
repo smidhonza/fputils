@@ -1,4 +1,4 @@
-import {Right, isLeft, Either, ILeft, IRight} from './';
+import { Right, isLeft, Either, ILeft, IRight } from './either';
 
 
 type AsyncFn<T, L, R> = (input: T) => Promise<Either<L, R>>;
