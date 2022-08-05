@@ -7,6 +7,8 @@ export const last: <T>(array: T[]) => Optional<T> = array => array[array.length 
 export const tail = <T>(array: T[] = []): T[] => array.slice(1);
 export const isArray = <T>(array: T | T[]): array is T[] => Array.isArray(array);
 export const cutHead = <T>([head, ...tail]: T[]): { head: T; tail: T[] } => ({ head, tail });
+export const length = <T>(arr: T[]) => arr.length
+export const isEmpty = <T>(array: T[]) => length(array) === 0;
 
 export const toArray = <T>(value: T | T[]): T[] => (isArray(value) ? value : [value]);
 
