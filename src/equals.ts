@@ -9,8 +9,8 @@ export type Equals = {
 export const equals: Equals = curry((a, b) => a === b);
 
 export type NotEqual = {
-  <A, B>(a: A, b: B): boolean
-  <A, B>(a: A): (b: B) => boolean
+  <A, B>(a: A, b: B): boolean;
+  <A, B>(a: A): (b: B) => boolean;
 }
 export const notEqual: NotEqual = curry((a,b) => pipe(equals(a,b), not));
 
