@@ -1,6 +1,6 @@
 import { curry } from './curry';
-import { compose } from './compose';
 import { not } from './common';
+import { pipe } from "./pipe";
 
 export type Equals = {
   <A, B>(a: A, b: B): boolean;
@@ -8,5 +8,9 @@ export type Equals = {
 }
 export const equals: Equals = curry((a, b) => a === b);
 
-export const notEqual: <A, B>(a: A) => (b: B) => boolean = (value) => compose(not, equals(value));
+export type NotEqual = {
+  <A, B>(a: A, b: B): boolean;
+  <A, B>(a: A): (b: B) => boolean;
+}
+export const notEqual: NotEqual = curry((a,b) => pipe(equals(a,b), not));
 
