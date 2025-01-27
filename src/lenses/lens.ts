@@ -1,7 +1,7 @@
 import { curry } from '../curry';
 import { prop } from '../prop';
 import { path } from '../path';
-import { Optional, ValueOf } from '../common';
+import { ValueOf } from '../common';
 import { assoc } from '../assoc';
 import { assocPath } from '../assocPath';
 
@@ -34,4 +34,3 @@ export const over = curry((lens, fn, obj) => set(lens)(fn(view(lens)(obj)))(obj)
 export const lensProp = (key: string) => lens(prop(key), assoc(key));
 
 export const lensPath = (key: string[]) => lens(path(key))(assocPath(key));
-
